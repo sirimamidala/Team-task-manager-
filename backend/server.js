@@ -19,8 +19,17 @@ app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 app.use('/api/assessments', require('./routes/assessmentRoutes'));
 
 // Serve Static Files in Production
-const frontendPath = path.resolve(__dirname, '..', 'frontend', 'dist');
-console.log('Frontend Static Path:', frontendPath);
+const frontendPath = path.resolve(process.cwd(), 'frontend', 'dist');
+console.log('Current Working Directory:', process.cwd());
+console.log('Target Frontend Static Path:', frontendPath);
+
+// Check if path exists
+const fs = require('fs');
+if (fs.existsSync(frontendPath)) {
+  console.log('Frontend dist folder found. Contents:', fs.readdirSync(frontendPath));
+} else {
+  console.error('WARNING: Frontend dist folder NOT found at:', frontendPath);
+}
 
 app.use(express.static(frontendPath));
 
