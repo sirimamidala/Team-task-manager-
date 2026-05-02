@@ -33,7 +33,8 @@ app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 app.use('/api/assessments', require('./routes/assessmentRoutes'));
 
 // For any other route, serve the index.html from frontend/dist
-app.get('*', (req, res) => {
+// For any other route, serve the index.html from frontend/dist
+app.use((req, res) => {
   const indexPath = path.join(frontendPath, 'index.html');
   res.sendFile(indexPath, (err) => {
     if (err) {
