@@ -60,7 +60,7 @@ console.log('Attempting to connect to Database...');
 connectDB()
   .then(() => {
     console.log('Database connected successfully.');
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server is live and running on port ${PORT}`);
     });
   })
