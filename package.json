@@ -3,14 +3,24 @@
   "version": "1.0.0",
   "description": "Team Task Manager Web App",
   "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && node server.js",
     "client": "cd frontend && npm run dev",
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install --prefix backend && npm install --prefix frontend && cd frontend && npm run build"
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "bcryptjs": "2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb-memory-server": "^11.1.0",
+    "mongoose": "^9.6.1"
   }
 }

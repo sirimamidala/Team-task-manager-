@@ -5,18 +5,24 @@ let mongoServer;
 
 const connectDB = async () => {
   try {
-    mongoServer = await MongoMemoryServer.create({
-      instance: {
-        launchTimeoutMS: 30000,
-      },
-    });
-    const mongoUri = mongoServer.getUri();
+    let mongoUri = process.env.MONGO_URI;
+
+    if (!mongoUri) {
+      console.log('No MONGO_URI found, starting in-memory MongoDB server...');
+      mongoServer = await MongoMemoryServer.create({
+        instance: {
+          launchTimeoutMS: 30000,
+        },
+      });
+      mongoUri = mongoServer.getUri();
+    }
 
     await mongoose.connect(mongoUri);
-    console.log(`MongoDB successfully connected to in-memory server: ${mongoUri}`);
+    console.log(`MongoDB successfully connected: ${mongoUri.includes('127.0.0.1') ? 'In-Memory' : 'Remote'}`);
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
-    process.exit(1);
+    // Don't exit immediately, maybe retry or wait
+    setTimeout(() => process.exit(1), 5000);
   }
 };
 
