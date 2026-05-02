@@ -12,7 +12,7 @@
     "server": "cd backend && node server.js",
     "client": "cd frontend && npm run dev",
     "build": "npm run build --prefix frontend",
-    "postinstall": "npm install --prefix backend && npm install --prefix frontend && npm run build"
+    "postinstall": "npm install --prefix frontend && npm run build"
   },
   "dependencies": {
     "concurrently": "^8.2.2",
